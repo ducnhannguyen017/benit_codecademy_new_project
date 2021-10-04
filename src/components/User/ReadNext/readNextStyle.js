@@ -1,0 +1,136 @@
+import { inner, outer } from "assets/styles/globalStyles";
+
+const readNextStyle = {
+  inner,
+  outer,
+  readNext: {
+    "& $readNextCard, & $readNextFeed": {
+      display: "flex",
+    },
+    "& $readNextFeed": {
+      flexWrap: "wrap",
+      margin: "0 -20px",
+      padding: "40px 0 0",
+      width: "auto",
+      "& $readNextCard": {
+        position: "relative",
+        flex: "1 1 300px",
+        flexDirection: "column",
+        overflow: "hidden",
+        margin: "0 20px 40px",
+        padding: "25px",
+        color: "#fff",
+        background: " #15171a 50%",
+        backgroundSize: "cover",
+        borderRadius: "5px",
+        boxShadow:
+          "8px 14px 38px rgb(39 44 49 / 6%), 1px 3px 8px rgb(39 44 49 / 3%)",
+        "&:before": {
+          content: '""',
+          position: "absolute",
+          top: "0",
+          right: "0",
+          bottom: "0",
+          left: "0",
+          display: "block",
+          background:
+            "linear-gradient(135deg,rgba(0,40,60,.8),rgba(0,20,40,.7))",
+          borderRadius: "5px",
+          backdropFilter: "blur(2px)",
+        },
+        "& $readNextCardHeader": {
+          position: "relative",
+          zIndex: "2",
+          paddingTop: "20px",
+          textAlign: "center",
+          "& $readNextCardHeaderSiteTitle": {
+            display: "block",
+            fontSize: "0.8125rem",
+            lineHeight: "1.3em",
+            opacity: ".8",
+          },
+          "& $readNextCardHeaderTitle": {
+            margin: "0",
+            padding: "0 20px",
+            color: "#fff",
+            fontSize: "1.875rem",
+            lineHeight: "1.2em",
+            letterSpacing: "1px",
+            "& a": {
+              color: "#fff",
+              fontWeight: "bolder",
+              textDecoration: "none",
+            },
+          },
+        },
+        "& $readNextDivider": {
+          position: "relative",
+          display: "flex",
+          justifyContent: "center",
+          height: "80px",
+          "& svg": {
+            width: "40px",
+            stroke: "#fff",
+            fill: "transparent",
+            strokeWidth: ".5px",
+            strokeOpacity: ".65",
+            height: "100%",
+          },
+        },
+        "& $readNextCardContent": {
+          position: "relative",
+          zIndex: "2",
+          flexGrow: "1",
+          display: "flex",
+          fontSize: "1.0865rem",
+          "& ul": {
+            display: "flex",
+            flexDirection: "column",
+            margin: "0 auto",
+            padding: "0",
+            listStyle: "none",
+            textAlign: "center",
+            "& li": {
+              margin: "0",
+              padding: "0",
+              fontSize: "1rem",
+              lineHeight: "1.25em",
+              fontWeight: "200",
+              letterSpacing: "-.5px",
+              "&:first-of-type a": {
+                paddingTop: "10px",
+              },
+              "& a": {
+                display: "block",
+                padding: "20px 0",
+                borderBottom: "1px solid hsla(0,0%,100%,.3)",
+                verticalAlign: "top",
+                color: "#fff",
+                fontWeight: "700",
+                transition: "opacity .3s ease",
+              },
+            },
+          },
+        },
+        "& $readNextCardFooter": {
+          position: "relative",
+          margin: "15px 0 3px",
+          textAlign: "center",
+          "& a": {
+            color: "#fff",
+          },
+        },
+      },
+    },
+  },
+  readNextFeed: {},
+  readNextCard: {},
+  readNextCardHeader: {},
+  readNextCardHeaderSiteTitle: {},
+  readNextCardHeaderTitle: {},
+  readNextDivider: {},
+  readNextCardContent: {},
+  readNextCardFooter: {},
+};
+
+export default readNextStyle;
