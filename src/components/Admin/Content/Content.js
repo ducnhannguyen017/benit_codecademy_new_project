@@ -6,7 +6,7 @@ import Footer from "components/Admin/Footer/Footer";
 
 const useStyles = makeStyles(style);
 function Content(props) {
-  const { expand, rows, columns, dropDownItems } = props;
+  const { expand, rows, columns, dropDownItems, getId } = props;
   const classes = useStyles();
   return (
     <main className={classes.content}>
@@ -20,6 +20,7 @@ function Content(props) {
                 columns={columns}
                 dropDownItems={dropDownItems}
                 expand={expand}
+                getId={getId}
               />
             </Paper>
           </Grid>

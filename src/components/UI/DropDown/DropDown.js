@@ -6,11 +6,16 @@ import style from "components/UI/DropDown/dropDownStyle";
 const useStyles = makeStyles(style);
 function DropDown(props) {
   const classes = useStyles();
-  const { dropDownItems } = props;
+  const { dropDownItems, getId, idPassed } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  console.log(idPassed);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    if (getId) {
+      getId(idPassed);
+    }
   };
 
   const handleClose = () => {

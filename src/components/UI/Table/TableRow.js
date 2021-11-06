@@ -1,4 +1,5 @@
 import {
+  Avatar,
   IconButton,
   Table,
   TableBody,
@@ -25,9 +26,10 @@ const useRowStyles = makeStyles({
   },
 });
 function TableRow(props) {
-  const { expand, row, dropDownItems } = props;
+  const { expand, row, dropDownItems, getId } = props;
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
+  console.log(row.Id);
 
   return (
     <>
@@ -43,16 +45,20 @@ function TableRow(props) {
             </IconButton>
           </TableCell>
         ) : null}
-
-        <TableCell>{row["Username"]}</TableCell>
-        <TableCell>{row.Password}</TableCell>
-        <TableCell>{row.FullName}</TableCell>
-        <TableCell>{row.Introduction}</TableCell>
+        {Object.values(row)
+          .slice(1)
+          .map((element) => (
+            <TableCell>{element}</TableCell>
+          ))}
         <TableCell>
-          <DropDown dropDownItems={dropDownItems} />
+          <DropDown
+            idPassed={row.Id}
+            getId={getId}
+            dropDownItems={dropDownItems}
+          />
         </TableCell>
       </MuiTableRow>
-      <MuiTableRow>
+      {/* <MuiTableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
@@ -93,7 +99,7 @@ function TableRow(props) {
             <Link to="/admin/posts-list">See more </Link>
           </Collapse>
         </TableCell>
-      </MuiTableRow>
+      </MuiTableRow> */}
     </>
   );
 }

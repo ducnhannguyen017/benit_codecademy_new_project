@@ -122,5 +122,22 @@ const authorCardStyle = {
       marginTop: "15px !important",
     },
   },
+
+  input: {
+    "&::before": {
+      content: "Select some files",
+      display: "inline-block",
+      background: "linear-gradient(top, #f9f9f9, #e3e3e3)",
+      border: "1px solid #999",
+      borderRadius: "3px",
+      padding: "5px 8px",
+      outline: "none",
+      whiteSpace: "nowrap",
+      cursor: "pointer",
+      textShadow: "1px 1px #fff",
+      fontWeight: "700",
+      fontSize: "10pt",
+    },
+  },
 };
 export default authorCardStyle;

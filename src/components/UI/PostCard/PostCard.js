@@ -1,35 +1,19 @@
 import { Box, Grid, makeStyles, Switch } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import styles from "components/UI/PostCard/postCardStyle";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
 import DropDown from "components/UI/DropDown/DropDown";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { useHistory } from "react-router-dom";
+import { requestDeletePost } from "api/api";
 
 const useStyle = makeStyles(styles);
-const dropDownItems = [
-  {
-    icon: <DeleteIcon />,
-    text: "Delete",
-  },
-  {
-    icon: <EditIcon />,
-    text: "Edit",
-  },
-  {
-    icon: (
-      <Switch
-        defaultChecked
-        color="primary"
-        inputProps={{ "aria-label": "checkbox with default color" }}
-      />
-    ),
-    text: "Public",
-  },
-];
+
 function PostCard(props) {
   const {
+    postCardImageId,
     postCardImage,
     postCardTags,
     postCardTitle,
@@ -38,10 +22,42 @@ function PostCard(props) {
     postCardAuthor,
     type,
     to,
+    id,
   } = props;
   const { action } = props;
-
   const classes = useStyle();
+
+  const history = useHistory();
+  const deleteAction = async () => {
+    if (window.confirm("Are you sure to delete")) {
+      const res = await requestDeletePost(id);
+      console.log(res);
+      if (res.status === 200) {
+        alert("Success");
+        history.go(0);
+        document.documentElement.scrollTop = 0;
+      }
+    }
+  };
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const EditAction = () => {
+    history.push(`/user/profile/${currentUser.id}/edit/${id}`);
+    history.go(0);
+  };
+  const dropDownItems = [
+    {
+      icon: <DeleteIcon />,
+      text: "Delete",
+      action: deleteAction,
+    },
+    {
+      icon: <EditIcon />,
+      text: "Edit",
+      action: EditAction,
+    },
+  ];
+
   return (
     <Grid
       component="article"

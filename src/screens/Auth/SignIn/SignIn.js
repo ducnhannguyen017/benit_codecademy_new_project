@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "components/UI/Button/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -13,6 +12,13 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Header from "components/User/Header/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { postAuth } from "redux/actions/AuthAction";
+import { Button } from "@material-ui/core";
+import tokenService from "api/tokenService";
+import { authSelector } from "redux/reducers/AuthReducer";
+import { useHistory } from "react-router-dom";
+import store from "app/store";
 
 function Copyright() {
   return (
@@ -81,11 +87,37 @@ const useStyles = makeStyles((theme) => ({
   help: {
     marginTop: "16px",
   },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 export default function SignIn() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [formLogin, setFormLogin] = useState({
+    username: "",
+    password: "",
+  });
+  const { username, password } = formLogin;
 
+  const handleChangeFormLogin = (e) =>
+    setFormLogin({ ...formLogin, [e.target.name]: e.target.value });
+
+  console.log(formLogin);
+
+  const handleSubmitFormLogin = (e) => {
+    e.preventDefault();
+    try {
+      dispatch(postAuth({ username: username, password: password }));
+      window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const user = useSelector(authSelector);
+  console.log(user);
   return (
     <div>
       <Header listNavLink={listNavLink} />
@@ -98,28 +130,36 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={handleSubmitFormLogin}
+          >
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              id="email"
+              id="username"
               label="Email Address"
-              name="email"
-              autoComplete="email"
+              autoComplete="username"
               autoFocus
+              onChange={handleChangeFormLogin}
+              value={username}
+              name="username"
             />
             <TextField
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChangeFormLogin}
+              value={password}
+              name="password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -128,11 +168,11 @@ export default function SignIn() {
             />
             <Button
               type="submit"
-              border="round"
+              fullWidth
+              variant="contained"
               color="primary"
-              textColor="white"
-              size="lg"
               className={classes.submit}
+              // onClick={handleSubmitFormLogin}
             >
               Sign In
             </Button>

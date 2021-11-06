@@ -20,6 +20,7 @@ import MuiAppBar from "@material-ui/core/AppBar";
 import style from "components/Admin/AppBar/appBarStyle";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+import CustomAvatar from "components/UI/CustomAvatar/CustomAvatar";
 
 const useStyle = makeStyles(style);
 function AppBar() {
@@ -60,6 +61,7 @@ function AppBar() {
           >
             Dashboard
           </Typography>
+          <CustomAvatar />
         </Toolbar>
       </MuiAppBar>
       <Drawer

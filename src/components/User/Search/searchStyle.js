@@ -1,5 +1,5 @@
 import { outer, inner } from "assets/styles/globalStyles";
-const searchStyle = {
+const searchStyle = (theme) => ({
   outer,
   inner: {
     ...inner,
@@ -35,5 +35,8 @@ const searchStyle = {
     height: "100%",
     padding: "0px",
   },
-};
+  typography: {
+    padding: theme.spacing(2),
+  },
+});
 export default searchStyle;

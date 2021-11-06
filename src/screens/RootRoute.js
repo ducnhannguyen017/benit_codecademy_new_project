@@ -13,6 +13,7 @@ import ScreenSignIn from "screens/Auth/SignIn/SignIn";
 import ScreenSignUp from "screens/Auth/SignUp/SignUp";
 import ScreenAccountList from "screens/Admin/AccountList/AccountList";
 import ScreenPostsList from "screens/Admin/PostsList/PostsList";
+import { PrivateRoute } from "components/Auth/PrivateRoute";
 
 function RootRoute() {
   return (
@@ -23,38 +24,25 @@ function RootRoute() {
         <Route exact path="/sign-up" component={ScreenSignUp} />
         <Redirect exact from="/user" to="/user/blog-home" />
         <Route exact path="/user/blog-home" component={ScreenBlogHome} />
+
+        <Route exact path="/user/tag/:tag" component={ScreenCategory} />
+
+        <Route exact path="/user/detail/:postId" component={ScreenPostFull} />
+        <Route exact path="/user/profile/:userId" component={ScreenProfile} />
         <Route
-          path="/user/career-advice"
-          render={(props) => (
-            <ScreenCategory {...props} category="career-advice" />
-          )}
+          exact
+          path="/user/profile/:userId/edit/:postId"
+          component={ScreenProfile}
         />
-        <Route
-          path="/user/learning-tips"
-          render={(props) => (
-            <ScreenCategory {...props} category="learning-tips" />
-          )}
-        />
-        <Route
-          path="/user/course-updates"
-          render={(props) => (
-            <ScreenCategory {...props} category="course-updates" />
-          )}
-        />
-        <Route
-          path="/user/news"
-          render={(props) => <ScreenCategory {...props} category="news" />}
-        />
-        <Route
-          path="/user/business"
-          render={(props) => <ScreenCategory {...props} category="business" />}
-        />
-        <Route path="/user/detail" component={ScreenPostFull} />
-        <Route path="/user/profile" component={ScreenProfile} />
         {/* Admin */}
-        <Redirect exact from="/admin" to="/admin/account-list" />
-        <Route path="/admin/accounts-list" component={ScreenAccountList} />
-        <Route path="/admin/posts-list" component={ScreenPostsList} />
+        <Redirect exact from="/admin" to="/admin/accounts-list" />
+        <PrivateRoute
+          exact
+          roles="ROLE_ADMIN"
+          path="/admin/accounts-list"
+          component={ScreenAccountList}
+        />
+        <Route exact path="/admin/posts-list" component={ScreenPostsList} />
       </Switch>
     </Router>
   );

@@ -2,6 +2,8 @@ import Header from "components/User/Header/Header";
 import Search from "components/User/Search/Search";
 import React from "react";
 import PostDetail from "components/User/PostDetail/PostDetail";
+import Footer from "components/User/Footer/Footer";
+import FloatingHeader from "components/User/Header/FloatingHeader";
 
 const headerContents = [
   {
@@ -36,12 +38,15 @@ const listNavLink = [
   },
   ...headerContents,
 ];
-function PostFull() {
+function PostFull(props) {
+  const { match } = props;
   return (
     <>
       <Header listNavLink={listNavLink} />
+      <FloatingHeader floatingHeaderActive={{ height: 100 }} />
       <Search />
-      <PostDetail />
+      <PostDetail id={match.params.postId} />
+      <Footer />
     </>
   );
 }

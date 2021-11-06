@@ -9,7 +9,7 @@ const useStyle = makeStyles(() => ({
   ...styles,
 }));
 function Button(props) {
-  const { children, size, color, to, border, textColor } = props;
+  const { children, size, color, to, border, textColor, ...rest } = props;
   const classes = useStyle();
   const btnClasses = clsx({
     [classes[color]]: color,
@@ -24,6 +24,7 @@ function Button(props) {
         [classes.root]: true,
         [classes[size]]: size,
       })}
+      {...rest}
     >
       <Link to={to} className={btnClasses}>
         <b>{children}</b>

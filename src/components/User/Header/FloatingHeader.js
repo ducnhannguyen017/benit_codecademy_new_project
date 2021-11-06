@@ -28,15 +28,17 @@ function FloatingHeader(props) {
     const processBarWidth =
       (windowsScroll / (htmlTag.scrollHeight - htmlTag.scrollTop)) * 100 + "%";
 
-    if (windowsScroll > floatingHeaderActive.height) {
-      document
-        .getElementById("floatingHeader")
-        .classList.add(classes[floatingHeaderActive]);
-      document.getElementById("processBar").style.width = processBarWidth;
-    } else {
-      document
-        .getElementById("floatingHeader")
-        .classList.remove(classes[floatingHeaderActive]);
+    if (document.getElementById("floatingHeader") !== null) {
+      if (windowsScroll > floatingHeaderActive.height) {
+        document
+          .getElementById("floatingHeader")
+          .classList.add(classes[floatingHeaderActive]);
+        document.getElementById("processBar").style.width = processBarWidth;
+      } else {
+        document
+          .getElementById("floatingHeader")
+          .classList.remove(classes[floatingHeaderActive]);
+      }
     }
   };
   const classes = useStyle();

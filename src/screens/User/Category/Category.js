@@ -1,53 +1,44 @@
+import { CircularProgress } from "@material-ui/core";
 import Header from "components/User/Header/Header";
 import PostFeed from "components/User/PostFeed/PostFeed";
 import Search from "components/User/Search/Search";
-import React from "react";
-import { convertToSlug } from "utils/User/userUtils";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getPostList } from "redux/actions/PostAction";
+import { categorySelector } from "redux/reducers/CategoryReducer";
+import { allPostSelector, selectPostByTag } from "redux/reducers/PostReducer";
 
-const headerContents = [
-  {
-    siteTitle: "Career Advice",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Learning Tips",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Course Updates",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "News",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Business",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-];
-const listNavLink = [
-  {
-    siteTitle: "Blog Home",
-  },
-  ...headerContents,
-];
 function Category(props) {
-  const { category } = props;
+  const { match } = props;
+  const { category, isLoading } = useSelector(categorySelector);
+  var headerContent;
+  if (!isLoading) {
+    headerContent = category.data.find(
+      (element) => element.tag === match.params.tag
+    );
+  }
+  //get all posts
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPostList());
+  }, [dispatch]);
 
-  const headerContent = headerContents.find(
-    (headerContent) => convertToSlug(headerContent.siteTitle) === category
-  );
+  const postList = useSelector(allPostSelector);
+  const data = postList.isLoading
+    ? null
+    : postList.post.data.filter(
+        (element) => element.category.tag === match.params.tag
+      );
+  console.log(postList);
   return (
     <>
-      <Header listNavLink={listNavLink} headerContent={headerContent} />
+      <Header headerContent={headerContent} />
       <Search />
-      <PostFeed type="noFullyPostCard" />
+      {postList.isLoading === false ? (
+        <PostFeed postsByUser={data} type="noFullyPostCard" />
+      ) : (
+        <CircularProgress />
+      )}
     </>
   );
 }

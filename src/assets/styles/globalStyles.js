@@ -1,7 +1,7 @@
 export const outer = {
   position: "relative",
   paddingLeft: "4vw",
-  paddingRight: "4vw",
+  paddingRight: "4vw !important",
 };
 export const inner = {
   width: "100%",

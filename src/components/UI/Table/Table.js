@@ -13,8 +13,9 @@ import TableRow from "components/UI/Table/TableRow";
 export default function Table(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const { expand, rows, columns, dropDownItems } = props;
+  const { expand, rows, columns, dropDownItems, getId } = props;
 
+  console.log(rows);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -49,10 +50,12 @@ export default function Table(props) {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
                 // <RowDataGrid key={row.id} row={row} />
+
                 <TableRow
                   row={row}
                   dropDownItems={dropDownItems}
                   expand={expand}
+                  getId={getId}
                 />
               ))}
           </TableBody>
