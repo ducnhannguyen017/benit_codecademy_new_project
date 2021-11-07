@@ -1,5 +1,5 @@
 import { Box, Grid, makeStyles } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import styles from "components/User/PostFeed/postFeedStyle";
 import PostCard from "components/UI/PostCard/PostCard";
 import clsx from "clsx";

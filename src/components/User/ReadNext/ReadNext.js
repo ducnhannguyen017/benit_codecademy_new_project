@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import style from "components/User/ReadNext/readNextStyle";
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
@@ -6,8 +6,6 @@ import { Link } from "react-router-dom";
 import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
 import PostCard from "components/UI/PostCard/PostCard";
 import { useDispatch, useSelector } from "react-redux";
-import { allPostSelector } from "redux/reducers/PostReducer";
-import { requestGetPostByCategory } from "api/api";
 import { getPostsByCate } from "redux/actions/PostAction";
 import { postsByCateSelector } from "redux/reducers/PostsByCateReducer";
 

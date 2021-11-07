@@ -1,17 +1,13 @@
-import { Box, CircularProgress, Grid, makeStyles } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import { Box, Grid, makeStyles } from "@material-ui/core";
+import React, { useEffect } from "react";
 import parse from "html-react-parser";
 import styles from "components/User/PostDetail/postDetailStyle";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
-import FloatingHeader from "components/User/Header/FloatingHeader";
 import ReadNext from "components/User/ReadNext/ReadNext";
-import Footer from "components/User/Footer/Footer";
 import AuthorCard from "components/User/AuthorCard/AuthorCard";
-import { requestGetPostById } from "api/api";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostDetail, getPostsByUser } from "redux/actions/PostAction";
-import { postsByUserSelector } from "redux/reducers/PostsByUserReducer";
+import { getPostDetail } from "redux/actions/PostAction";
 import { postsDetailSelector } from "redux/reducers/PostDetailReducer";
 
 const useStyle = makeStyles(styles);

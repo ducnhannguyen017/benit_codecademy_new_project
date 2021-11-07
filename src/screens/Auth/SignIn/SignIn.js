@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -15,10 +15,7 @@ import Header from "components/User/Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { postAuth } from "redux/actions/AuthAction";
 import { Button } from "@material-ui/core";
-import tokenService from "api/tokenService";
 import { authSelector } from "redux/reducers/AuthReducer";
-import { useHistory } from "react-router-dom";
-import store from "app/store";
 
 function Copyright() {
   return (
@@ -95,7 +92,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
   const [formLogin, setFormLogin] = useState({
     username: "",
     password: "",

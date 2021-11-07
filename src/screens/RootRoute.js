@@ -38,11 +38,16 @@ function RootRoute() {
         <Redirect exact from="/admin" to="/admin/accounts-list" />
         <PrivateRoute
           exact
-          roles="ROLE_ADMIN"
+          role="ROLE_ADMIN"
           path="/admin/accounts-list"
           component={ScreenAccountList}
         />
-        <Route exact path="/admin/posts-list" component={ScreenPostsList} />
+        <PrivateRoute
+          exact
+          role="ROLE_ADMIN"
+          path="/admin/posts-list"
+          component={ScreenPostsList}
+        />
       </Switch>
     </Router>
   );

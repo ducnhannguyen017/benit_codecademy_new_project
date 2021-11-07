@@ -1,21 +1,9 @@
-import {
-  Avatar,
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-} from "@material-ui/core";
+import { IconButton, TableCell } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Collapse from "@material-ui/core/Collapse";
-import Typography from "@material-ui/core/Typography";
 import { useState } from "react";
 import DropDown from "components/UI/DropDown/DropDown";
-
-import { Link } from "react-router-dom";
 import MuiTableRow from "@material-ui/core/TableRow";
 
 const useRowStyles = makeStyles({

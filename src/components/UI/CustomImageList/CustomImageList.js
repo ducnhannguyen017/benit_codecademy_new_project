@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import ImageListItemBar from "@material-ui/core/ImageListItemBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import { TextField } from "@material-ui/core";
@@ -63,38 +62,10 @@ const useStyles = makeStyles((theme) => ({
  *   },
  * ];
  */
-const itemData = [
-  {
-    img: "https://firebasestorage.googleapis.com/v0/b/benit-codecademy-news-app.appspot.com/o/1.png?alt=media&token=02efe23f-fcbf-4076-8711-69b134efc80c",
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: "https://firebasestorage.googleapis.com/v0/b/benit-codecademy-news-app.appspot.com/o/1.png?alt=media&token=02efe23f-fcbf-4076-8711-69b134efc80c",
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: "https://firebasestorage.googleapis.com/v0/b/benit-codecademy-news-app.appspot.com/o/1.png?alt=media&token=02efe23f-fcbf-4076-8711-69b134efc80c",
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: "https://firebasestorage.googleapis.com/v0/b/benit-codecademy-news-app.appspot.com/o/1.png?alt=media&token=02efe23f-fcbf-4076-8711-69b134efc80c",
-    title: "Image",
-    author: "author",
-  },
-  {
-    img: "https://firebasestorage.googleapis.com/v0/b/benit-codecademy-news-app.appspot.com/o/1.png?alt=media&token=02efe23f-fcbf-4076-8711-69b134efc80c",
-    title: "Image",
-    author: "author",
-  },
-];
 
 export default function CustomImageList(props) {
   const classes = useStyles();
   const { imageList } = props;
-  const [image, setImage] = useState();
 
   const handleClickImage = () => {};
 
@@ -103,7 +74,6 @@ export default function CustomImageList(props) {
       <TextField
         id="filled-read-only-input"
         label="Image"
-        defaultValue={image}
         InputProps={{
           readOnly: true,
         }}

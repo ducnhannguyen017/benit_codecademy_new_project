@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostList } from "redux/actions/PostAction";
 import { categorySelector } from "redux/reducers/CategoryReducer";
-import { allPostSelector, selectPostByTag } from "redux/reducers/PostReducer";
+import { allPostSelector } from "redux/reducers/PostReducer";
 
 function Category(props) {
   const { match } = props;

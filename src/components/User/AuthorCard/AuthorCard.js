@@ -12,7 +12,6 @@ import clsx from "clsx";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import { requestUploadAvatar } from "api/api";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { useHistory } from "react-router";
 
 const useStyle = makeStyles(style);
@@ -102,15 +101,6 @@ function AuthorCard(props) {
                 Read More
               </Button>
             </Grid>
-          )}
-          {currentUser.roles.includes("ROLE_ADMIN") && size === "lg" && (
-            <Link
-              style={{ fontWeight: "600", color: "black" }}
-              className={classes.socialLink}
-              to="/admin"
-            >
-              Admin page <ArrowForwardIcon />
-            </Link>
           )}
         </Grid>
       )}

@@ -52,6 +52,7 @@ export default function Table(props) {
                 // <RowDataGrid key={row.id} row={row} />
 
                 <TableRow
+                  // key={row.id}
                   row={row}
                   dropDownItems={dropDownItems}
                   expand={expand}

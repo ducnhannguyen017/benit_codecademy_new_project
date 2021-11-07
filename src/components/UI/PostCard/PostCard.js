@@ -1,5 +1,5 @@
-import { Box, Grid, makeStyles, Switch } from "@material-ui/core";
-import React, { useState } from "react";
+import { Box, Grid, makeStyles } from "@material-ui/core";
+import React from "react";
 import styles from "components/UI/PostCard/postCardStyle";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
@@ -13,7 +13,6 @@ const useStyle = makeStyles(styles);
 
 function PostCard(props) {
   const {
-    postCardImageId,
     postCardImage,
     postCardTags,
     postCardTitle,

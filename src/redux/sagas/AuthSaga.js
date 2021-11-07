@@ -20,15 +20,12 @@ import {
   requestLogin,
   requestUploadAvatar,
 } from "api/api";
-import tokenService from "api/tokenService";
 
 function* postAuth(action) {
   console.log(action.payload.username);
   try {
     const response = yield call(requestLogin, action.payload);
-    tokenService.setUser(response.data);
-    localStorage.setItem("access_token", response.data.accessToken);
-    localStorage.setItem("refresh_token", response.data.refreshToken);
+    localStorage.setItem("currentUser", JSON.stringify(response.data));
     yield put({ type: AUTH_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: AUTH_ERROR, payload: err });

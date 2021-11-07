@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Header from "components/User/Header/Header";
 import Search from "components/User/Search/Search";
 import PostFeed from "components/User/PostFeed/PostFeed";
 import AuthorCard from "components/User/AuthorCard/AuthorCard";
-import { requestGetPostsByUserId, requestGetUserById } from "api/api";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "redux/actions/AuthAction";
 import { getPostDetail, getPostsByUser } from "redux/actions/PostAction";

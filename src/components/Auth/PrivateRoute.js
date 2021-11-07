@@ -1,13 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import tokenService from "api/tokenService";
-import store from "app/store";
 
 export const PrivateRoute = ({ component: Component, role, ...rest }) => (
   <Route
     {...rest}
     render={(props) => {
-      const currentUser = JSON.parse(tokenService.getUser());
+      const currentUser = JSON.parse(localStorage.getItem("currentUser"));
       // console.log(currentUser);
       if (!currentUser) {
         // not logged in so redirect to login page with the return url
@@ -18,7 +16,7 @@ export const PrivateRoute = ({ component: Component, role, ...rest }) => (
         );
       }
       // check if route is restricted by role
-      if (role && currentUser.role.indexOf(role) === -1) {
+      if (role && currentUser.roles.indexOf(role) === -1) {
         // role not authorised so redirect to home page
         return <Redirect to={{ pathname: "/" }} />;
       }

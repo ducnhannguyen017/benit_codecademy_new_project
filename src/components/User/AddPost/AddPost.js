@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  IconButton,
   ImageList,
-  ImageListItem,
-  ImageListItemBar,
   makeStyles,
   MenuItem,
   Switch,
@@ -13,7 +10,6 @@ import {
 import style from "components/User/AddPost/addPostStyle";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
-import CustomImageList from "components/UI/CustomImageList/CustomImageList";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "redux/actions/CategoryAction";
 import { categorySelector } from "redux/reducers/CategoryReducer";
@@ -53,7 +49,7 @@ function AddPost(props) {
     }
   }, [postDetail]);
   console.log(addPostForm);
-  const { title, excerpt, content, isPublic, username, imageId, categoryTag } =
+  const { title, excerpt, content, isPublic, imageId, categoryTag } =
     addPostForm;
   const handleChangeAddPostForm = (e) => {
     setAddPostForm({ ...addPostForm, [e.target.name]: e.target.value });

@@ -3,7 +3,6 @@ import React from "react";
 import MuiButton from "@material-ui/core/Button";
 import Button from "components/UI/Button/Button";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
 
 function CustomAvatar() {
   const history = useHistory();
@@ -21,6 +20,8 @@ function CustomAvatar() {
     history.push("/sign-in");
   };
 
+  const pathname = window.location.pathname;
+
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   return (
@@ -30,7 +31,6 @@ function CustomAvatar() {
         onClick={handleClickDropDown}
         src={currentUser.avatar}
         aria-describedby={id}
-        variant="contained"
       />
       <Popover
         id={id}
@@ -47,7 +47,12 @@ function CustomAvatar() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {currentUser.roles.includes("ROLE_ADMIN") && (
+          {currentUser.roles.includes("ROLE_ADMIN") &&
+          pathname.includes("admin/") ? (
+            <Button to={`/`} size="lg">
+              Home Page
+            </Button>
+          ) : (
             <Button to={`/admin`} size="lg">
               Admin Page
             </Button>
@@ -56,7 +61,6 @@ function CustomAvatar() {
             Profile
           </Button>
           <MuiButton
-            size="lg"
             onClick={logOut}
             style={{ fontSize: "12px", color: "#351DED" }}
           >
