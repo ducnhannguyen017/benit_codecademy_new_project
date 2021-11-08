@@ -49,7 +49,11 @@ function DropDown(props) {
         style={{ padding: "12px 6px" }}
       >
         {dropDownItems.map((dropDownItem) => (
-          <div onClick={dropDownItem.action} className={classes.link}>
+          <div
+            key={dropDownItem.id}
+            onClick={dropDownItem.action}
+            className={classes.link}
+          >
             {dropDownItem.icon === undefined ? null : dropDownItem.icon}
             <Typography className={classes.typography}>
               {dropDownItem.text}

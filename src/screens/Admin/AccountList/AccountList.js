@@ -7,15 +7,15 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserList } from "redux/actions/AuthAction";
 import { userListSelector } from "redux/reducers/UserListReducer";
-import { Avatar } from "@material-ui/core";
+import { Avatar, CircularProgress } from "@material-ui/core";
 import { requestDeleteUser } from "api/api";
 
 const columns = [
-  { field: "UserName ", headerName: "UserName ", size: "15%" },
+  { field: "UserName ", headerName: "UserName ", size: "10%" },
   { field: "FullName ", headerName: "Full Name ", size: "20%" },
   { field: "Introduction ", headerName: "Introduction ", size: "40%" },
-  { field: "Roles ", headerName: "Roles", size: "15%" },
-  { field: "Avatar ", headerName: "Avatar", size: "10%" },
+  { field: "Roles ", headerName: "Roles", size: "10%" },
+  { field: "Avatar ", headerName: "Avatar", size: "5%" },
 ];
 
 function createData(row) {
@@ -24,8 +24,8 @@ function createData(row) {
     Username: row.username,
     FullName: row.name,
     Introduction: row.introduction,
-    Role: row.roles.map((element) => element.name + ","),
-    Avatar: <Avatar alt="" src={row.Avatar} />,
+    Role: row.roles.map((element) => element.name + "\n"),
+    Avatar: <Avatar alt="" src={row.avatar} />,
   };
 }
 
@@ -38,8 +38,9 @@ export default function AccountList() {
   }, [dispatch]);
 
   const userList = useSelector(userListSelector);
+  console.log(userList);
   var rows;
-  if (!userList.isLoading) {
+  if (!userList.isLoading && userList.userList.data !== undefined) {
     rows = [userList.userList.data.map((element) => createData(element))];
   }
   console.log(rows);
@@ -66,11 +67,13 @@ export default function AccountList() {
 
   const dropDownItems = [
     {
+      id: 1,
       icon: <DeleteIcon />,
       text: "Delete",
       action: deleteAction,
     },
     {
+      id: 1,
       icon: <ViewCarouselIcon />,
       text: "View",
       action: viewAction,

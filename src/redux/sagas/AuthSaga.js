@@ -25,7 +25,9 @@ function* postAuth(action) {
   console.log(action.payload.username);
   try {
     const response = yield call(requestLogin, action.payload);
+    console.log(response);
     localStorage.setItem("currentUser", JSON.stringify(response.data));
+
     yield put({ type: AUTH_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: AUTH_ERROR, payload: err });

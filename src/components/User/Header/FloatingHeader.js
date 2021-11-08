@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const useStyle = makeStyles(style);
 function FloatingHeader(props) {
-  const { floatingHeaderActive } = props;
+  const { floatingHeaderActive, title } = props;
 
   useEffect(() => {
     if (floatingHeaderActive) {
@@ -60,7 +60,7 @@ function FloatingHeader(props) {
         —
       </Grid>
       <Grid item className={classes.floatingHeaderTitle}>
-        10 Swift Code Challenges for Beginners
+        {title}
       </Grid>
       <Grid item container className={classes.floatingHeaderShare}>
         <Grid item container className={classes.floatingHeaderShareLabel}>

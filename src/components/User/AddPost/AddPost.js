@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  CircularProgress,
   ImageList,
   makeStyles,
   MenuItem,
@@ -18,6 +19,7 @@ import { getImageList } from "redux/actions/ImageAction";
 import Button from "@material-ui/core/Button";
 import { requestPostSavePost } from "api/api";
 import { useHistory } from "react-router";
+import { getPostsByUser } from "redux/actions/PostAction";
 
 const useStyle = makeStyles(style);
 
@@ -25,7 +27,7 @@ function AddPost(props) {
   const classes = useStyle();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { postDetail } = props;
+  const { postDetail, userId } = props;
   console.log(postDetail);
   const editor = null;
   const [addPostForm, setAddPostForm] = useState({
@@ -92,7 +94,8 @@ function AddPost(props) {
         isPublic: Boolean(isPublic),
       });
       res.status === Number(200) ? alert("Add Post Success") : alert("Lỗi");
-      history.go(0);
+      // history.go(0);
+      dispatch(getPostsByUser(userId));
     } catch (error) {
       alert("Lỗi");
     }
@@ -101,7 +104,9 @@ function AddPost(props) {
   console.log(addPostForm);
   return (
     <>
-      {categories.isLoading && images.isLoading ? null : (
+      {categories.isLoading && images.isLoading ? (
+        <CircularProgress />
+      ) : (
         <div className={classes.postManipulationWrapper}>
           <div style={{ width: "90%", margin: "auto" }}>
             <Typography className={classes.textField} component="h2">
@@ -141,32 +146,31 @@ function AddPost(props) {
               name="categoryTag"
               onChange={handleChangeAddPostForm}
             >
-              {categories.category.data.map((option) => (
-                <MenuItem key={option.id} value={option.tag}>
-                  {option.name}
-                </MenuItem>
-              ))}
+              {categories.category.data !== undefined &&
+                categories.category.data.map((option) => (
+                  <MenuItem key={option.id} value={option.tag}>
+                    {option.name}
+                  </MenuItem>
+                ))}
             </TextField>
             <div className={classes.root}>
               <ImageList rowHeight={180} className={classes.image} id="image">
-                {images.imageList.data === undefined
-                  ? null
-                  : images.imageList.data.map((item) => (
-                      // <div>
-                      <MenuItem
-                        key={item.id}
-                        className={classes.hover}
-                        onClick={handleClickImage}
-                        value={item.id}
-                      >
-                        <img
-                          src={item.filename}
-                          alt={item.id}
-                          value={item.id}
-                        />
-                      </MenuItem>
-                      // </div>
-                    ))}
+                {images.imageList.data === undefined ? (
+                  <CircularProgress />
+                ) : (
+                  images.imageList.data.map((item) => (
+                    // <div>
+                    <MenuItem
+                      key={item.id}
+                      className={classes.hover}
+                      onClick={handleClickImage}
+                      value={item.id}
+                    >
+                      <img src={item.filename} alt={item.id} value={item.id} />
+                    </MenuItem>
+                    // </div>
+                  ))
+                )}
               </ImageList>
             </div>
             <div

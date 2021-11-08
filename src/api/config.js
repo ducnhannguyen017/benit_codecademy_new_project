@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const URL = "http://localhost:8080/api";
+const URL = "https://benit-backend-codecademy-news.herokuapp.com/api";
+// const URL = "http://localhost:8080/api";
 
 function createAxios() {
   var axiosInstance = axios.create();
@@ -56,27 +57,27 @@ function createAxios() {
       (res) => {
         return res;
       },
+
       async (err) => {
         const originalConfig = err.config;
         // Access Token was expired
-        if (err.response.status === 403 && !originalConfig._retry) {
-          originalConfig._retry = true;
-          try {
-            const rs = await axios.get(`${URL}/user/token/refresh`, {
-              headers: {
-                Authorization: "Bearer " + currentUser.refreshToken,
-              },
-            });
-            console.log(rs);
-            if (rs.status === 403) {
-              window.location.href = "/sign-in";
+        if (err.response) {
+          if (err.response.status === 401 && !originalConfig._retry) {
+            originalConfig._retry = true;
+            try {
+              const rs = await axios.get(`${URL}/user/token/refresh`, {
+                headers: {
+                  Authorization: "Bearer " + currentUser.refreshToken,
+                },
+              });
+              console.log(rs);
+              const { accessToken } = rs.data;
+              currentUser.accessToken = accessToken;
+              localStorage.setItem("currentUser", JSON.stringify(currentUser));
+              return axiosInstance(originalConfig);
+            } catch (error) {
+              return Promise.reject(error);
             }
-            const { accessToken } = rs.data;
-            currentUser.accessToken = accessToken;
-            localStorage.setItem("currentUser", JSON.stringify(currentUser));
-            return axiosInstance(originalConfig);
-          } catch (error) {
-            return Promise.reject(error);
           }
         }
         return Promise.reject(err);

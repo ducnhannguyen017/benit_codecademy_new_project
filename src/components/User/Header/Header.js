@@ -31,9 +31,7 @@ function Header(props) {
   };
   return (
     <>
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
+      {isLoading ? null : (
         <AppBar
           elevation={0}
           className={clsx(classes.siteHeader, classes.outer)}

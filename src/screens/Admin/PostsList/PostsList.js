@@ -7,13 +7,13 @@ import { useHistory } from "react-router";
 import { getPostList } from "redux/actions/PostAction";
 import { allPostSelector } from "redux/reducers/PostReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { Avatar } from "@material-ui/core";
+import { Avatar, CircularProgress } from "@material-ui/core";
 import { requestDeletePost } from "api/api";
 
 const columns = [
-  { field: "Title", headerName: "Title", size: "30%" },
+  { field: "Title", headerName: "Title", size: "20%" },
   { field: "Excerpt ", headerName: "Excerpt ", size: "50%" },
-  { field: "User", headerName: "User", size: "10%" },
+  { field: "User", headerName: "User", size: "20%" },
   { field: "Category ", headerName: "Category ", size: "5%" },
   { field: "isPublic ", headerName: "isPublic ", size: "5%" },
 ];
@@ -26,7 +26,7 @@ function createData(row) {
     User: (
       <>
         {row.appUser.name}
-        <Avatar alt="" src={row.Avatar} />
+        <Avatar alt="" src={row.appUser.avatar} />
       </>
     ),
     Category: row.category.name,
@@ -71,11 +71,13 @@ export default function PostsList() {
 
   const dropDownItems = [
     {
+      id: 1,
       icon: <DeleteIcon />,
       text: "Delete",
       action: deleteAction,
     },
     {
+      id: 1,
       icon: <ViewCarouselIcon />,
       text: "View",
       action: viewAction,
@@ -84,7 +86,9 @@ export default function PostsList() {
   return (
     <div style={{ display: "flex" }}>
       <AppBar />
-      {postList.isLoading ? null : (
+      {postList.isLoading ? (
+        <CircularProgress />
+      ) : (
         <Content
           rows={rows[0]}
           columns={columns}

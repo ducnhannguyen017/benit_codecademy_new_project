@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   auth: {},
-  isLoading: true,
+  isLoading: null,
   error: null,
 };
 

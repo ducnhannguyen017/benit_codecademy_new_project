@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import style from "components/User/ReadNext/readNextStyle";
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import { Box, CircularProgress, Grid, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import AllInclusiveIcon from "@material-ui/icons/AllInclusive";
@@ -8,11 +8,13 @@ import PostCard from "components/UI/PostCard/PostCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsByCate } from "redux/actions/PostAction";
 import { postsByCateSelector } from "redux/reducers/PostsByCateReducer";
+import { useHistory } from "react-router";
 
 const useStyle = makeStyles(style);
 function ReadNext(props) {
   const classes = useStyle();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { id } = props;
   useEffect(() => {
     dispatch(getPostsByCate(id));
@@ -23,7 +25,9 @@ function ReadNext(props) {
   return (
     <>
       {/* {postByCate !== {} && ( */}
-      {postsByCate.isLoading ? null : (
+      {postsByCate.isLoading ? (
+        <CircularProgress />
+      ) : (
         <>
           <Box
             component="aside"
@@ -59,7 +63,10 @@ function ReadNext(props) {
                         .slice(0, 3)
                         .map((element) => (
                           <Grid item component="li" key={element.id}>
-                            <Link to={`/user/detail/${element.id}`}>
+                            <Link
+                              to={`/user/detail/${element.id}`}
+                              onClick={() => history.go(0)}
+                            >
                               {element.title}
                             </Link>
                           </Grid>
@@ -70,7 +77,9 @@ function ReadNext(props) {
                     component="footer"
                     className={classes.readNextCardFooter}
                   >
-                    <Link to="/">
+                    <Link
+                      to={`/user/tag/${postsByCate.postsByCate.data[0].category.tag}`}
+                    >
                       See all {postsByCate.postsByCate.data.length} posts →
                     </Link>
                   </Box>
@@ -83,6 +92,8 @@ function ReadNext(props) {
                     postCardExcerpt={element.excerpt}
                     authorProfileImage={element.appUser.avatar}
                     postCardAuthor={element.appUser.name}
+                    key={element.id}
+                    to={`/user/detail/${element.id}`}
                   />
                 ))}
               </Grid>

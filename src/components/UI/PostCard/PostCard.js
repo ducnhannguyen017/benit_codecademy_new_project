@@ -1,4 +1,4 @@
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import { Box, CircularProgress, Grid, makeStyles } from "@material-ui/core";
 import React from "react";
 import styles from "components/UI/PostCard/postCardStyle";
 import { Link } from "react-router-dom";
@@ -46,11 +46,13 @@ function PostCard(props) {
   };
   const dropDownItems = [
     {
+      id: 1,
       icon: <DeleteIcon />,
       text: "Delete",
       action: deleteAction,
     },
     {
+      id: 2,
       icon: <EditIcon />,
       text: "Edit",
       action: EditAction,

@@ -1,4 +1,4 @@
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import { Box, CircularProgress, Grid, makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import parse from "html-react-parser";
 import styles from "components/User/PostDetail/postDetailStyle";
@@ -9,6 +9,7 @@ import AuthorCard from "components/User/AuthorCard/AuthorCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostDetail } from "redux/actions/PostAction";
 import { postsDetailSelector } from "redux/reducers/PostDetailReducer";
+import FloatingHeader from "components/User/Header/FloatingHeader";
 
 const useStyle = makeStyles(styles);
 function PostDetail(props) {
@@ -36,7 +37,9 @@ function PostDetail(props) {
 
   return (
     <>
-      {postDetail.isLoading ? null : (
+      {postDetail.isLoading ? (
+        <CircularProgress />
+      ) : (
         <>
           <Box
             component="main"
@@ -88,7 +91,10 @@ function PostDetail(props) {
               </Box>
             </Box>
           </Box>
-
+          <FloatingHeader
+            title={postDetail.postDetail.data.title}
+            floatingHeaderActive={{ height: 100 }}
+          />
           <ReadNext id={postDetail.postDetail.data.category.id} />
         </>
       )}

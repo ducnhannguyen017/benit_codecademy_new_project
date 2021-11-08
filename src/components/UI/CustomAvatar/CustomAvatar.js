@@ -48,15 +48,15 @@ function CustomAvatar() {
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
           {currentUser.roles.includes("ROLE_ADMIN") &&
-          pathname.includes("admin/") ? (
-            <Button to={`/`} size="lg">
-              Home Page
-            </Button>
-          ) : (
-            <Button to={`/admin`} size="lg">
-              Admin Page
-            </Button>
-          )}
+            (pathname.includes("admin/") ? (
+              <Button to={`/`} size="lg">
+                Home Page
+              </Button>
+            ) : (
+              <Button to={`/admin`} size="lg">
+                Admin Page
+              </Button>
+            ))}
           <Button to={`/user/profile/${currentUser.id}`} size="lg">
             Profile
           </Button>

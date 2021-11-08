@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "components/User/Header/Header";
 import Search from "components/User/Search/Search";
 import PostFeed from "components/User/PostFeed/PostFeed";
@@ -9,6 +9,7 @@ import { getPostDetail, getPostsByUser } from "redux/actions/PostAction";
 import { userByIdSelector } from "redux/reducers/UserByIdReducer";
 import { postsByUserSelector } from "redux/reducers/PostsByUserReducer";
 import { postsDetailSelector } from "redux/reducers/PostDetailReducer";
+import { CircularProgress } from "@material-ui/core";
 
 function Profile(props) {
   const { match } = props;
@@ -41,17 +42,35 @@ function Profile(props) {
     currentUser !== null &&
       Number(match.params.userId) === Number(currentUser.id)
   );
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const getSearchTerm = (searchTerm) => {
+    setSearchTerm(searchTerm);
+  };
+  console.log(searchTerm);
   return (
     <>
-      {author.isLoading && posts.isLoading && postDetail.isLoading ? null : (
+      {author.isLoading && posts.isLoading && postDetail.isLoading ? (
+        <CircularProgress />
+      ) : (
         <>
           <Header />
-          <Search />
-          <AuthorCard author={author.userById.data} size="lg" />
+          <Search getSearchTerm={getSearchTerm} />
+          <AuthorCard
+            action={action}
+            countPosts={
+              posts.postsByUser.data !== undefined &&
+              posts.postsByUser.data.length
+            }
+            author={author.userById.data}
+            size="lg"
+            userId={match.params.userId}
+          />
           <PostFeed
             postDetail={postDetail.postDetail.data}
             postsByUser={posts.postsByUser.data}
             action={action}
+            userId={match.params.userId}
           />
         </>
       )}

@@ -22,8 +22,8 @@ function BlogHome() {
     setSearchTerm(searchTerm);
   };
   console.log(searchTerm);
-  var data;
 
+  var data;
   if (searchTerm !== "" && !postList.isLoading) {
     data = postList.post.data.filter((element) =>
       element.title.toLowerCase().includes(searchTerm)

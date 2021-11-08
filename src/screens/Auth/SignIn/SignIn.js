@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -14,7 +14,7 @@ import Container from "@material-ui/core/Container";
 import Header from "components/User/Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { postAuth } from "redux/actions/AuthAction";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import { authSelector } from "redux/reducers/AuthReducer";
 
 function Copyright() {
@@ -103,16 +103,30 @@ export default function SignIn() {
 
   console.log(formLogin);
 
+  var error = false;
+  const currentUser = localStorage.getItem("currentUser");
   const handleSubmitFormLogin = (e) => {
     e.preventDefault();
     try {
       dispatch(postAuth({ username: username, password: password }));
-      window.location.href = "/";
+      if (error) {
+        alert("Wrong username or password");
+      }
     } catch (error) {
       console.log(error);
     }
   };
   const user = useSelector(authSelector);
+  useEffect(() => {
+    if (currentUser) {
+      window.location.href = "/";
+    }
+
+    if (user.error !== null) {
+      alert("Wrong username or password");
+    }
+  }, [currentUser, user]);
+
   console.log(user);
   return (
     <div>
@@ -162,6 +176,7 @@ export default function SignIn() {
               label="Remember me"
               className={classes.rememberMe}
             />
+
             <Button
               type="submit"
               fullWidth
@@ -170,7 +185,7 @@ export default function SignIn() {
               className={classes.submit}
               // onClick={handleSubmitFormLogin}
             >
-              Sign In
+              {user.isLoading ? <CircularProgress /> : <>Sign In</>}
             </Button>
             <Grid container className={classes.help}>
               <Grid item xs>

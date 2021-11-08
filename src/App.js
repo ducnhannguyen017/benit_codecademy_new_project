@@ -1,5 +1,6 @@
 import { CssBaseline } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
+import { refreshToken } from "api/api";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "redux/actions/CategoryAction";

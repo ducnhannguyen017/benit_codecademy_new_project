@@ -23,6 +23,7 @@ const authorCardStyle = {
         objectFit: "cover",
       },
       "& $authorCardContent": {
+        width: "80%",
         "& $authorCardName": {
           margin: "0 0 2px",
           padding: "0",
@@ -137,6 +138,18 @@ const authorCardStyle = {
       textShadow: "1px 1px #fff",
       fontWeight: "700",
       fontSize: "10pt",
+    },
+  },
+  textField: {
+    width: "90%",
+    margin: "12px auto",
+    fontSize: "20px",
+    fontWeight: "600",
+    display: "flex",
+    // margin:"auto",
+    "& .MuiSelect": {
+      height: "50px",
+      background: "rgb(232,232,232)",
     },
   },
 };
