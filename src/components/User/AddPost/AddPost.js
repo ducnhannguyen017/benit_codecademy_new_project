@@ -18,14 +18,12 @@ import { imageListSelector } from "redux/reducers/ImageListReducer";
 import { getImageList } from "redux/actions/ImageAction";
 import Button from "@material-ui/core/Button";
 import { requestPostSavePost } from "api/api";
-import { useHistory } from "react-router";
 import { getPostsByUser } from "redux/actions/PostAction";
 
 const useStyle = makeStyles(style);
 
 function AddPost(props) {
   const classes = useStyle();
-  const history = useHistory();
   const dispatch = useDispatch();
   const { postDetail, userId } = props;
   console.log(postDetail);

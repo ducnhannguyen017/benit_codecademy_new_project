@@ -47,46 +47,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const headerContents = [
-  {
-    siteTitle: "Career Advice",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Learning Tips",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Course Updates",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "News",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Business",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-];
-const listNavLink = [
-  {
-    siteTitle: "Blog Home",
-  },
-  ...headerContents,
-];
-
 export default function SignUp() {
   const classes = useStyles();
 
   return (
     <>
-      <Header listNavLink={listNavLink} />
+      <Header />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>

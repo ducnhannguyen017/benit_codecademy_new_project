@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ApiClient } from "./config";
 
 export const requestImageList = () => ApiClient.get("/image/list");

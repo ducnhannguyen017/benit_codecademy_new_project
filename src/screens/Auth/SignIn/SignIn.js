@@ -29,39 +29,6 @@ function Copyright() {
     </Typography>
   );
 }
-const headerContents = [
-  {
-    siteTitle: "Career Advice",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Learning Tips",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Course Updates",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "News",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-  {
-    siteTitle: "Business",
-    siteDescription:
-      "Interested in a career in web development, programming, computer science, or data science? Find tips, advice, and answers to questions about careers in coding.",
-  },
-];
-const listNavLink = [
-  {
-    siteTitle: "Blog Home",
-  },
-  ...headerContents,
-];
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -103,34 +70,31 @@ export default function SignIn() {
 
   console.log(formLogin);
 
-  var error = false;
   const currentUser = localStorage.getItem("currentUser");
   const handleSubmitFormLogin = (e) => {
     e.preventDefault();
     try {
       dispatch(postAuth({ username: username, password: password }));
-      if (error) {
-        alert("Wrong username or password");
-      }
     } catch (error) {
       console.log(error);
     }
   };
   const user = useSelector(authSelector);
   useEffect(() => {
+    if (!user.isLoading) {
+      if (user.error !== null) {
+        alert("Wrong username or password");
+      }
+    }
     if (currentUser) {
       window.location.href = "/";
-    }
-
-    if (user.error !== null) {
-      alert("Wrong username or password");
     }
   }, [currentUser, user]);
 
   console.log(user);
   return (
     <div>
-      <Header listNavLink={listNavLink} />
+      <Header />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -183,9 +147,12 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              // onClick={handleSubmitFormLogin}
             >
-              {user.isLoading ? <CircularProgress /> : <>Sign In</>}
+              {user.isLoading ? (
+                <CircularProgress color="action" />
+              ) : (
+                <>Sign In</>
+              )}
             </Button>
             <Grid container className={classes.help}>
               <Grid item xs>
