@@ -19,12 +19,14 @@ import { getImageList } from "redux/actions/ImageAction";
 import Button from "@material-ui/core/Button";
 import { requestPostSavePost } from "api/api";
 import { getPostsByUser } from "redux/actions/PostAction";
+import { useHistory } from "react-router-dom";
 
 const useStyle = makeStyles(style);
 
 function AddPost(props) {
   const classes = useStyle();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { postDetail, userId } = props;
   console.log(postDetail);
   const editor = null;
@@ -92,7 +94,7 @@ function AddPost(props) {
         isPublic: Boolean(isPublic),
       });
       res.status === Number(200) ? alert("Add Post Success") : alert("Lỗi");
-      // history.go(0);
+      history.go(0);
       dispatch(getPostsByUser(userId));
     } catch (error) {
       alert("Lỗi");

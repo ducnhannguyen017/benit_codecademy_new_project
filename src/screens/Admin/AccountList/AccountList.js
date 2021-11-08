@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserList } from "redux/actions/AuthAction";
 import { userListSelector } from "redux/reducers/UserListReducer";
-import { Avatar, CircularProgress } from "@material-ui/core";
+import { Avatar } from "@material-ui/core";
 import { requestDeleteUser } from "api/api";
 
 const columns = [
