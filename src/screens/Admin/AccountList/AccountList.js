@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserList } from "redux/actions/AuthAction";
 import { userListSelector } from "redux/reducers/UserListReducer";
-import { Avatar } from "@material-ui/core";
+import { Avatar, CircularProgress } from "@material-ui/core";
 import { requestDeleteUser } from "api/api";
 
 const columns = [
@@ -82,7 +82,9 @@ export default function AccountList() {
   return (
     <div style={{ display: "flex" }}>
       <AppBar />
-      {userList.isLoading ? null : (
+      {userList.isLoading ? (
+        <CircularProgress />
+      ) : (
         <Content
           rows={rows[0]}
           columns={columns}

@@ -23,25 +23,28 @@ function Category(props) {
     dispatch(getPostList());
   }, [dispatch]);
 
-  const postList = useSelector(allPostSelector);
-  const data = postList.isLoading
-    ? null
-    : postList.post.data.filter(
-        (element) => element.category.tag === match.params.tag
-      );
-  console.log(data);
-
   const [searchTerm, setSearchTerm] = useState("");
   const getSearchTerm = (searchTerm) => {
     setSearchTerm(searchTerm);
   };
   console.log(searchTerm);
+
+  const postList = useSelector(allPostSelector);
+  const data = postList.isLoading
+    ? null
+    : postList.post.data.filter(
+        (element) =>
+          element.category.tag === match.params.tag &&
+          element.title.toLowerCase().includes(searchTerm)
+      );
+  console.log(data);
+
   return (
     <>
       <Header headerContent={headerContent} />
       <Search getSearchTerm={getSearchTerm} />
       {postList.isLoading === false ? (
-        <PostFeed postsByUser={data} type="noFullyPostCard" />
+        <PostFeed posts={data} type="noFullyPostCard" />
       ) : (
         <CircularProgress />
       )}

@@ -48,6 +48,15 @@ function Profile(props) {
     setSearchTerm(searchTerm);
   };
   console.log(searchTerm);
+  var data;
+  if (searchTerm !== "" && !posts.isLoading) {
+    data = posts.postsByUser.data.filter((element) =>
+      element.title.toLowerCase().includes(searchTerm)
+    );
+  } else {
+    data = posts.postsByUser.data;
+  }
+
   return (
     <>
       {author.isLoading && posts.isLoading && postDetail.isLoading ? (
@@ -68,7 +77,7 @@ function Profile(props) {
           />
           <PostFeed
             postDetail={postDetail.postDetail.data}
-            postsByUser={posts.postsByUser.data}
+            posts={data}
             action={action}
             userId={match.params.userId}
           />

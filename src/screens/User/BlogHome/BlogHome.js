@@ -38,7 +38,7 @@ function BlogHome() {
       <Header />
       <Search getSearchTerm={getSearchTerm} />
       {postList.isLoading === false ? (
-        <PostFeed postsByUser={data} type="fullyPostCard" />
+        <PostFeed posts={data} type="fullyPostCard" />
       ) : (
         <CircularProgress />
       )}

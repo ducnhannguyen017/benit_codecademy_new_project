@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Header from "components/User/Header/Header";
+import { requestSaveUser } from "api/api";
 
 function Copyright() {
   return (
@@ -49,6 +50,37 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [signUpForm, setSignUpForm] = useState({
+    name: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const { name, username, password, confirmPassword } = signUpForm;
+  const handleSubmitFormSignUp = async (e) => {
+    e.preventDefault();
+    try {
+      if (password !== confirmPassword) {
+        alert("Check your password");
+      } else {
+        const res = await requestSaveUser({
+          name: name,
+          username: username,
+          password: password,
+        });
+        console.log(res);
+        res.status !== 200
+          ? alert("Create Account Fail")
+          : alert("Create Account Success");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleChangeSignUpForm = (e) => {
+    setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
+  };
+  console.log(signUpForm);
 
   return (
     <>
@@ -62,29 +94,20 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmitFormSignUp}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="fname"
-                  name="firstName"
+                  name="name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="name"
+                  label="Name"
                   autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
+                  onChange={handleChangeSignUpForm}
+                  value={name}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -92,10 +115,12 @@ export default function SignUp() {
                   variant="outlined"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete=""
+                  onChange={handleChangeSignUpForm}
+                  value={username}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -108,14 +133,22 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={handleChangeSignUpForm}
+                  value={password}
                 />
               </Grid>
-              <Grid item xs={12} style={{ marginBottom: "24px" }}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  type="password"
+                  id="confirmPassword"
+                  autoComplete="current-password"
+                  onChange={handleChangeSignUpForm}
+                  value={confirmPassword}
                 />
               </Grid>
             </Grid>

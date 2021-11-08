@@ -8,7 +8,7 @@ import AddPost from "components/User/AddPost/AddPost";
 const useStyle = makeStyles(styles);
 
 function PostFeed(props) {
-  const { action, postsByUser, postDetail } = props;
+  const { action, posts, postDetail } = props;
   const classes = useStyle();
 
   return (
@@ -17,10 +17,10 @@ function PostFeed(props) {
         <Box className={classes.inner}>
           {action === "on" ? <AddPost postDetail={postDetail} /> : null}
           <Grid container className={classes.postFeed}>
-            {postsByUser === undefined ? (
+            {posts === undefined ? (
               <CircularProgress />
             ) : (
-              postsByUser.map((row) => (
+              posts.map((row) => (
                 <PostCard
                   postCardImageId={row.image.id}
                   postCardImage={row.image.filename}

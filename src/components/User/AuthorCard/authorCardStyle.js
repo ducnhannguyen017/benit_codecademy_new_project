@@ -59,7 +59,7 @@ const authorCardStyle = {
         display: "block",
         padding: " 9px 16px",
         border: "1px solid #aebbc1",
-        color: "#738a94",
+
         fontSize: "0.75rem",
         lineHeight: "1",
         fontWeight: "800",

@@ -57,7 +57,6 @@ function createAxios() {
       (res) => {
         return res;
       },
-
       async (err) => {
         const originalConfig = err.config;
         // Access Token was expired
@@ -70,10 +69,17 @@ function createAxios() {
                   Authorization: "Bearer " + currentUser.refreshToken,
                 },
               });
-              console.log(rs);
-              const { accessToken } = rs.data;
-              currentUser.accessToken = accessToken;
-              localStorage.setItem("currentUser", JSON.stringify(currentUser));
+              if (rs.status !== 200) {
+                window.location.href = "/sign-in";
+              } else {
+                console.log(rs);
+                const { accessToken } = rs.data;
+                currentUser.accessToken = accessToken;
+                localStorage.setItem(
+                  "currentUser",
+                  JSON.stringify(currentUser)
+                );
+              }
               return axiosInstance(originalConfig);
             } catch (error) {
               return Promise.reject(error);

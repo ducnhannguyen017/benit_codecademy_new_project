@@ -200,7 +200,12 @@ function AuthorCard(props) {
           ) : (
             <Grid className={classes.postDetailFooterRight} item>
               <Button textColor="gray" border="round" to="">
-                Read More
+                <Link
+                  style={{ color: "#738a94" }}
+                  to={`/user/profile/${author.id}`}
+                >
+                  Read More
+                </Link>
               </Button>
             </Grid>
           )}

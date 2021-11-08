@@ -20,6 +20,7 @@ export const requestPostSavePost = (params) =>
 export const requestDeletePost = (id) => ApiClient.post(`/post/delete/${id}`);
 export const requestUploadAvatar = (id, params) =>
   ApiClient.post(`image/upload-to-user/${id}`, params);
-export const requestDeleteUser = (id) => ApiClient.post(`user/delete/${id}`);
+export const requestDeleteUser = (id) => ApiClient.post(`/user/delete/${id}`);
 export const requestUpdateUser = (id, params) =>
-  ApiClient.post(`user/update/${id}`, params);
+  ApiClient.post(`/user/update/${id}`, params);
+export const requestSaveUser = (params) => ApiClient.post(`/user/save`, params);

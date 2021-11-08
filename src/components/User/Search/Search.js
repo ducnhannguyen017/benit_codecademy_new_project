@@ -14,7 +14,6 @@ import { useHistory } from "react-router";
 const useStyle = makeStyles(style);
 function Search(props) {
   const classes = useStyle();
-  const history = useHistory();
   const { getSearchTerm } = props;
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const dispatch = useDispatch();
@@ -28,7 +27,7 @@ function Search(props) {
   };
   const handleClick = (e) => {
     getSearchTerm(searchTerm);
-    history.push("/");
+    // history.push("/");
   };
 
   return (
