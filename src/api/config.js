@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const URL = "https://benit-backend-codecademy-news.herokuapp.com/api";
-// const URL = "http://localhost:8080/api";
+// const URL = "https://benit-backend-codecademy-news.herokuapp.com/api";
+const URL = "http://localhost:8080/api";
 
 function createAxios() {
   var axiosInstance = axios.create();
