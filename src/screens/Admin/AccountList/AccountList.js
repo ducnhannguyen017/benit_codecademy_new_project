@@ -38,18 +38,15 @@ export default function AccountList() {
   }, [dispatch]);
 
   const userList = useSelector(userListSelector);
-  console.log(userList);
   var rows;
   if (!userList.isLoading && userList.userList.data !== undefined) {
     rows = [userList.userList.data.map((element) => createData(element))];
   }
-  console.log(rows);
 
   const [id, setId] = useState();
   const deleteAction = async () => {
     if (window.confirm("Are you sure to delete")) {
       const res = await requestDeleteUser(id);
-      console.log(res);
       if (res.status === 200) {
         alert("Success");
         history.go(0);
@@ -63,7 +60,6 @@ export default function AccountList() {
   const getId = (id) => {
     setId(id);
   };
-  console.log(id);
 
   const dropDownItems = [
     {

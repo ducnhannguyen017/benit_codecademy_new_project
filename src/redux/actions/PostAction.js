@@ -1,9 +1,9 @@
 import {
+  DELETE_POST_DETAIL,
   GET_ALL_POSTS_LOADING,
   GET_POSTS_BY_CATE_LOADING,
   GET_POSTS_BY_USER_LOADING,
   GET_POST_DETAIL_LOADING,
-  SET_SEARCH_TERM,
 } from "redux/constant/ActionType";
 
 export const getPostList = () => ({
@@ -26,7 +26,7 @@ export const getPostsByCate = (id) => ({
   payload: id,
 });
 
-export const setSearchTerm = (term) => ({
-  type: SET_SEARCH_TERM,
-  payload: term,
+export const deletePostDetail = () => ({
+  type: DELETE_POST_DETAIL,
+  payload: {},
 });

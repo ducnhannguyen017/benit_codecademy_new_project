@@ -15,7 +15,6 @@ export default function Table(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const { expand, rows, columns, dropDownItems, getId } = props;
 
-  console.log(rows);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

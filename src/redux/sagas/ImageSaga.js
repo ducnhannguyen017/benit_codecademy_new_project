@@ -11,7 +11,6 @@ import { requestImageList } from "api/api";
 function* getImageList() {
   try {
     const response = yield call(requestImageList);
-    console.log(response);
     yield put({ type: GET_IMAGE_LIST_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: GET_IMAGE_LIST_ERROR, payload: err });

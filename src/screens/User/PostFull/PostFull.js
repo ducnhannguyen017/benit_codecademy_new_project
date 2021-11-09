@@ -10,13 +10,12 @@ function PostFull(props) {
   const getSearchTerm = (searchTerm) => {
     setSearchTerm(searchTerm);
   };
-  console.log(searchTerm);
 
   return (
     <>
       <Header />
       <Search getSearchTerm={getSearchTerm} />
-      <PostDetail id={match.params.postId} />
+      <PostDetail id={match.params.id} />
       <Footer />
     </>
   );

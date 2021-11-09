@@ -2,6 +2,7 @@ import {
   GET_POST_DETAIL_LOADING,
   GET_POST_DETAIL_SUCCESS,
   GET_POST_DETAIL_ERROR,
+  DELETE_POST_DETAIL_SUCCESS,
 } from "redux/constant/ActionType";
 
 const initialState = {
@@ -29,6 +30,9 @@ export default function PostDetailReducer(state = initialState, action) {
         error: action.payload,
         isLoading: false,
       };
+    }
+    case DELETE_POST_DETAIL_SUCCESS: {
+      return initialState;
     }
     default:
       return state;

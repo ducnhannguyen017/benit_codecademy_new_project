@@ -29,9 +29,7 @@ function AuthorCard(props) {
     [classes.authorDetail]: true,
   });
 
-  console.log(author);
   const [selectedFile, setSelectedFile] = useState();
-  console.log(selectedFile);
 
   const currentUser = author;
   // const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -40,13 +38,12 @@ function AuthorCard(props) {
       let formData = new FormData();
       formData.append("file", selectedFile);
       const res = await requestUploadAvatar(currentUser.id, formData);
-      console.log(res);
       currentUser.avatar = res.data.avatar;
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
       res.status === 200 ? alert("Success") : alert("Error");
       history.go(0);
     } catch (error) {
-      console.log(error);
+      alert("Error");
     }
   };
   const [editPersonalInfor, setEditPersonalInfor] = useState(false);
@@ -71,8 +68,7 @@ function AuthorCard(props) {
   const { name, introduction } = updateForm;
   const savePersonalInfor = async () => {
     try {
-      const res = await requestUpdateUser(currentUser.id);
-      console.log(res);
+      const res = await requestUpdateUser(currentUser.id, updateForm);
       res.status === 200 ? alert("Success") : alert("error");
       dispatch(getUserById(userId));
       editName();
@@ -81,7 +77,6 @@ function AuthorCard(props) {
   const handleChangeUpdateForm = (e) => {
     setUpdateForm({ ...updateForm, [e.target.name]: e.target.value });
   };
-  console.log(updateForm);
   return (
     <>
       {author === undefined ? (
@@ -152,7 +147,7 @@ function AuthorCard(props) {
                         }}
                         onClick={editName}
                       >
-                        <b>Cancle</b>
+                        <b>Cancel</b>
                       </MuiButton>
                     </>
                   )}
@@ -172,10 +167,20 @@ function AuthorCard(props) {
               <div className={classes.authorStats}>
                 {countPosts} posts <span className={classes.bull}>•</span>
               </div>
-              <Link className={classes.socialLink} to="facebook.com">
+              <Link
+                className={classes.socialLink}
+                onClick={() => {
+                  window.location.href = "https://facebook.com";
+                }}
+              >
                 <FacebookIcon />
               </Link>
-              <Link className={classes.socialLink} to="facebook.com">
+              <Link
+                className={classes.socialLink}
+                onClick={() => {
+                  window.location.href = "https://twitter.com";
+                }}
+              >
                 <TwitterIcon />
               </Link>
               {action === "on" && (

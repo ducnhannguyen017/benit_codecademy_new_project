@@ -29,12 +29,15 @@ function PostCard(props) {
   const history = useHistory();
   const deleteAction = async () => {
     if (window.confirm("Are you sure to delete")) {
-      const res = await requestDeletePost(id);
-      console.log(res);
-      if (res.status === 200) {
-        alert("Success");
-        history.go(0);
-        document.documentElement.scrollTop = 0;
+      try {
+        const res = await requestDeletePost(id);
+        if (res.status === 200) {
+          alert("Success");
+          history.go(0);
+          document.documentElement.scrollTop = 0;
+        }
+      } catch (e) {
+        alert("Error");
       }
     }
   };

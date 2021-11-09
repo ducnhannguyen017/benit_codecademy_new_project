@@ -1,4 +1,6 @@
 import {
+  DELETE_POST_DETAIL,
+  DELETE_POST_DETAIL_SUCCESS,
   GET_ALL_POSTS_ERROR,
   GET_ALL_POSTS_LOADING,
   GET_ALL_POSTS_SUCCESS,
@@ -11,7 +13,6 @@ import {
   GET_POST_DETAIL_ERROR,
   GET_POST_DETAIL_LOADING,
   GET_POST_DETAIL_SUCCESS,
-  SET_SEARCH_TERM,
 } from "redux/constant/ActionType";
 
 import { put, call, takeLatest } from "@redux-saga/core/effects";
@@ -25,7 +26,6 @@ import {
 function* getPost() {
   try {
     const response = yield call(requestGetAllPosts);
-    console.log(response);
     yield put({ type: GET_ALL_POSTS_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: GET_ALL_POSTS_ERROR, payload: err });
@@ -38,7 +38,6 @@ const watchGetPost = takeLatest(GET_ALL_POSTS_LOADING, getPost);
 function* getPostsByCate(action) {
   try {
     const response = yield call(requestGetPostByCategory, action.payload);
-    console.log(response);
     yield put({ type: GET_POSTS_BY_CATE_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: GET_POSTS_BY_CATE_ERROR, payload: err });
@@ -54,7 +53,6 @@ const watchGetPostsByCate = takeLatest(
 function* getPostsByUser(action) {
   try {
     const response = yield call(requestGetPostsByUserId, action.payload);
-    console.log(response);
     yield put({ type: GET_POSTS_BY_USER_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: GET_POSTS_BY_USER_ERROR, payload: err });
@@ -70,7 +68,6 @@ const watchGetPostByUser = takeLatest(
 function* getPostDetail(action) {
   try {
     const response = yield call(requestGetPostById, action.payload);
-    console.log(response);
     yield put({ type: GET_POST_DETAIL_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: GET_POST_DETAIL_ERROR, payload: err });
@@ -79,18 +76,16 @@ function* getPostDetail(action) {
 //watcher related to post
 const watchGetPostDetail = takeLatest(GET_POST_DETAIL_LOADING, getPostDetail);
 
-function* setSearchTerm(action) {
-  yield put({ type: SET_SEARCH_TERM, payload: action.payload });
+function* deletePostDetail() {
+  yield put({ type: DELETE_POST_DETAIL_SUCCESS });
 }
-//watcher related to post
-const watchSetSearchTerm = takeLatest(SET_SEARCH_TERM, setSearchTerm);
+const watchDeletePostDetail = takeLatest(DELETE_POST_DETAIL, deletePostDetail);
 
-// watch all action to post
 function* postSaga() {
   yield watchGetPost;
   yield watchGetPostByUser;
   yield watchGetPostDetail;
   yield watchGetPostsByCate;
-  yield watchSetSearchTerm;
+  yield watchDeletePostDetail;
 }
 export default postSaga;

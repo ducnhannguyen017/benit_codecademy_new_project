@@ -27,7 +27,7 @@ function RootRoute() {
 
         <Route exact path="/user/tag/:tag" component={ScreenCategory} />
 
-        <Route exact path="/user/detail/:postId" component={ScreenPostFull} />
+        <Route exact path="/user/detail/:id" component={ScreenPostFull} />
         <Route exact path="/user/profile/:userId" component={ScreenProfile} />
         <Route
           exact

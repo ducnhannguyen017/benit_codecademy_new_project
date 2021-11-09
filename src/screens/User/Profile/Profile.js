@@ -5,7 +5,11 @@ import PostFeed from "components/User/PostFeed/PostFeed";
 import AuthorCard from "components/User/AuthorCard/AuthorCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserById } from "redux/actions/AuthAction";
-import { getPostDetail, getPostsByUser } from "redux/actions/PostAction";
+import {
+  deletePostDetail,
+  getPostDetail,
+  getPostsByUser,
+} from "redux/actions/PostAction";
 import { userByIdSelector } from "redux/reducers/UserByIdReducer";
 import { postsByUserSelector } from "redux/reducers/PostsByUserReducer";
 import { postsDetailSelector } from "redux/reducers/PostDetailReducer";
@@ -14,12 +18,16 @@ import { CircularProgress } from "@material-ui/core";
 function Profile(props) {
   const { match } = props;
   const dispatch = useDispatch();
-  console.log(match);
+  dispatch(deletePostDetail());
+  document.documentElement.scrollTop = 0;
 
   useEffect(() => {
     dispatch(getUserById(match.params.userId));
     dispatch(getPostsByUser(match.params.userId));
-    if (match.params.postId) {
+    if (
+      match.params.postId &&
+      match.path === "/user/profile/:userId/edit/:postId"
+    ) {
       dispatch(getPostDetail(match.params.postId));
     }
   }, [dispatch]);
@@ -27,9 +35,6 @@ function Profile(props) {
   const author = useSelector(userByIdSelector);
   const posts = useSelector(postsByUserSelector);
   const postDetail = useSelector(postsDetailSelector);
-  console.log(author);
-  console.log(posts);
-  console.log(postDetail);
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const action =
@@ -38,16 +43,10 @@ function Profile(props) {
       ? "on"
       : "off";
 
-  console.log(
-    currentUser !== null &&
-      Number(match.params.userId) === Number(currentUser.id)
-  );
-
   const [searchTerm, setSearchTerm] = useState("");
   const getSearchTerm = (searchTerm) => {
     setSearchTerm(searchTerm);
   };
-  console.log(searchTerm);
   var data;
   if (searchTerm !== "" && !posts.isLoading) {
     data = posts.postsByUser.data.filter((element) =>

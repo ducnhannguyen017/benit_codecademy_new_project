@@ -9,8 +9,6 @@ function DropDown(props) {
   const { dropDownItems, getId, idPassed } = props;
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  console.log(idPassed);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     if (getId) {

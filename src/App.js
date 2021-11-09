@@ -20,9 +20,6 @@ function App() {
     dispatch(getCategory());
   }, [dispatch]);
 
-  const temp = useSelector(categorySelector);
-  console.log(temp);
-
   const classes = useStyles();
   return (
     <div className={classes.siteWrapper}>

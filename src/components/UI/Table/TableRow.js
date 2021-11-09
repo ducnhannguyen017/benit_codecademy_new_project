@@ -17,7 +17,6 @@ function TableRow(props) {
   const { expand, row, dropDownItems, getId } = props;
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
-  console.log(row.Id);
 
   return (
     <>
@@ -46,48 +45,6 @@ function TableRow(props) {
           />
         </TableCell>
       </MuiTableRow>
-      {/* <MuiTableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                Posts
-              </Typography>
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <MuiTableRow>
-                    <TableCell>Time</TableCell>
-                    <TableCell>Title</TableCell>
-                    <TableCell align="right">Excerpt</TableCell>
-                    <TableCell align="right">Public</TableCell>
-                    <TableCell align="right">&nbsp;</TableCell>
-                  </MuiTableRow>
-                </TableHead>
-                <TableBody>
-                  {row.Posts.map((postRow) => (
-                    <MuiTableRow key={postRow.Time}>
-                      <TableCell component="th" scope="row">
-                        {postRow.Time}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {postRow.Title}
-                      </TableCell>
-                      <TableCell>{postRow.Excerpt}</TableCell>
-                      <TableCell align="right">
-                        {postRow.Public.toString()}
-                      </TableCell>
-                      <TableCell align="right">
-                        <DropDown dropDownItems={dropDownItems} />
-                      </TableCell>
-                    </MuiTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-            <Link to="/admin/posts-list">See more </Link>
-          </Collapse>
-        </TableCell>
-      </MuiTableRow> */}
     </>
   );
 }

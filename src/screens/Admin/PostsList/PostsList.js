@@ -43,18 +43,15 @@ export default function PostsList() {
   }, [dispatch]);
 
   const postList = useSelector(allPostSelector);
-  console.log(postList);
   var rows;
   if (!postList.isLoading) {
     rows = [postList.post.data.map((element) => createData(element))];
   }
-  console.log(rows);
 
   const [id, setId] = useState();
   const deleteAction = async () => {
     if (window.confirm("Are you sure to delete")) {
       const res = await requestDeletePost(id);
-      console.log(res);
       if (res.status === 200) {
         alert("Success");
         history.go(0);

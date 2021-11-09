@@ -68,16 +68,12 @@ export default function SignIn() {
   const handleChangeFormLogin = (e) =>
     setFormLogin({ ...formLogin, [e.target.name]: e.target.value });
 
-  console.log(formLogin);
-
   const currentUser = localStorage.getItem("currentUser");
   const handleSubmitFormLogin = (e) => {
     e.preventDefault();
     try {
       dispatch(postAuth({ username: username, password: password }));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   const user = useSelector(authSelector);
   useEffect(() => {
@@ -91,7 +87,6 @@ export default function SignIn() {
     }
   }, [currentUser, user]);
 
-  console.log(user);
   return (
     <div>
       <Header />
@@ -115,7 +110,7 @@ export default function SignIn() {
               required
               fullWidth
               id="username"
-              label="Email Address"
+              label="User Name"
               autoComplete="username"
               autoFocus
               onChange={handleChangeFormLogin}

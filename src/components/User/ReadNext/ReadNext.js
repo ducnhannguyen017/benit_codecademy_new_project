@@ -21,7 +21,6 @@ function ReadNext(props) {
   }, [dispatch]);
 
   const postsByCate = useSelector(postsByCateSelector);
-  console.log(postsByCate);
   return (
     <>
       {/* {postByCate !== {} && ( */}
@@ -94,6 +93,7 @@ function ReadNext(props) {
                     postCardAuthor={element.appUser.name}
                     key={element.id}
                     to={`/user/detail/${element.id}`}
+                    onCLick={() => history.go(0)}
                   />
                 ))}
               </Grid>

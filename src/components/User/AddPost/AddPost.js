@@ -28,7 +28,6 @@ function AddPost(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { postDetail, userId } = props;
-  console.log(postDetail);
   const editor = null;
   const [addPostForm, setAddPostForm] = useState({
     title: "",
@@ -50,9 +49,7 @@ function AddPost(props) {
       });
     }
   }, [postDetail]);
-  console.log(addPostForm);
-  const { title, excerpt, content, isPublic, imageId, categoryTag } =
-    addPostForm;
+  const { title, excerpt, content, isPublic, categoryTag } = addPostForm;
   const handleChangeAddPostForm = (e) => {
     setAddPostForm({ ...addPostForm, [e.target.name]: e.target.value });
   };
@@ -72,7 +69,6 @@ function AddPost(props) {
         .classList.remove("active");
     }
     e.target.offsetParent.classList.add("active");
-    console.log(e.target.getAttribute("value"));
     setAddPostForm({ ...addPostForm, imageId: e.target.getAttribute("value") });
   };
   const handleChangePublic = (e) => {
@@ -84,16 +80,11 @@ function AddPost(props) {
 
   const handleClickSavePost = async () => {
     try {
-      console.log({
-        ...addPostForm,
-        imageId: Number(imageId),
-        isPublic: Boolean(isPublic),
-      });
       const res = await requestPostSavePost({
         ...addPostForm,
         isPublic: Boolean(isPublic),
       });
-      res.status === Number(200) ? alert("Add Post Success") : alert("Lỗi");
+      res.status === Number(200) ? alert(" Post Success") : alert("Lỗi");
       history.go(0);
       dispatch(getPostsByUser(userId));
     } catch (error) {
@@ -101,7 +92,6 @@ function AddPost(props) {
     }
   };
 
-  console.log(addPostForm);
   return (
     <>
       {categories.isLoading && images.isLoading ? (

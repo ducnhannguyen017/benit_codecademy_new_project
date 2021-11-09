@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -14,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Header from "components/User/Header/Header";
 import { requestSaveUser } from "api/api";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -50,12 +49,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const [signUpForm, setSignUpForm] = useState({
+  const history = useHistory();
+  const initState = {
     name: "",
     username: "",
     password: "",
     confirmPassword: "",
-  });
+  };
+  const [signUpForm, setSignUpForm] = useState(initState);
   const { name, username, password, confirmPassword } = signUpForm;
   const handleSubmitFormSignUp = async (e) => {
     e.preventDefault();
@@ -68,19 +69,20 @@ export default function SignUp() {
           username: username,
           password: password,
         });
-        console.log(res);
-        res.status !== 200
-          ? alert("Create Account Fail")
-          : alert("Create Account Success");
+        if (res.status !== 200) {
+          alert("Create Account Fail");
+        } else {
+          alert("Create Account Success");
+          history.push("/sign-in");
+        }
       }
     } catch (error) {
-      console.log(error);
+      alert("Username existed");
     }
   };
   const handleChangeSignUpForm = (e) => {
     setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
   };
-  console.log(signUpForm);
 
   return (
     <>

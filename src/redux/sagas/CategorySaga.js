@@ -11,7 +11,6 @@ import { requestGetAllCategories } from "api/api";
 function* getCategory() {
   try {
     const response = yield call(requestGetAllCategories);
-    console.log(response);
     yield put({ type: GET_CATEGORY_SUCCESS, payload: response });
   } catch (err) {
     yield put({ type: GET_CATEGORY_ERROR, payload: err });

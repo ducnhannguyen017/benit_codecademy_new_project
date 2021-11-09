@@ -27,7 +27,6 @@ function Category(props) {
   const getSearchTerm = (searchTerm) => {
     setSearchTerm(searchTerm);
   };
-  console.log(searchTerm);
 
   const postList = useSelector(allPostSelector);
   const data = postList.isLoading
@@ -37,7 +36,6 @@ function Category(props) {
           element.category.tag === match.params.tag &&
           element.title.toLowerCase().includes(searchTerm)
       );
-  console.log(data);
 
   return (
     <>

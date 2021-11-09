@@ -30,7 +30,6 @@ function PostDetail(props) {
   }, [dispatch]);
 
   const postDetail = useSelector(postsDetailSelector);
-  console.log(postDetail);
   if (postDetail.isLoading === false) {
     date = new Date(postDetail.postDetail.data.updatedAt);
   }

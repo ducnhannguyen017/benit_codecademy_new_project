@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const URL = "https://benit-backend-codecademy-news.herokuapp.com/api";
-// const URL = "http://localhost:8080/api";
+// const URL = "https://benit-backend-codecademy-news.herokuapp.com/api";
+const URL = "http://localhost:8080/api";
 
 function createAxios() {
   var axiosInstance = axios.create();
@@ -36,16 +36,12 @@ function createAxios() {
             haveAuth = false;
           }
         });
-        console.log(haveAuth);
-        console.log(currentUser.accessToken);
         if (haveAuth) {
           config.headers = {
             ...config.headers,
             Authorization: `Bearer ${currentUser.accessToken}`,
           };
-          console.log(config.headers);
         }
-        console.log(config);
         return config;
       },
       (error) => {
@@ -72,7 +68,6 @@ function createAxios() {
               if (rs.status !== 200) {
                 window.location.href = "/sign-in";
               } else {
-                console.log(rs);
                 const { accessToken } = rs.data;
                 currentUser.accessToken = accessToken;
                 localStorage.setItem(

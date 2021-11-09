@@ -15,13 +15,11 @@ function BlogHome() {
   }, [dispatch]);
 
   const postList = useSelector(allPostSelector);
-  console.log(postList);
 
   const [searchTerm, setSearchTerm] = useState("");
   const getSearchTerm = (searchTerm) => {
     setSearchTerm(searchTerm);
   };
-  console.log(searchTerm);
 
   var data;
   if (searchTerm !== "" && !postList.isLoading) {
@@ -32,7 +30,6 @@ function BlogHome() {
     data = postList.post.data;
   }
 
-  console.log(data);
   return (
     <>
       <Header />

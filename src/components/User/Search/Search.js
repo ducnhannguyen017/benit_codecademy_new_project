@@ -9,7 +9,6 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useDispatch } from "react-redux";
 import { getPostList } from "redux/actions/PostAction";
 import CustomAvatar from "components/UI/CustomAvatar/CustomAvatar";
-import { useHistory } from "react-router";
 
 const useStyle = makeStyles(style);
 function Search(props) {
